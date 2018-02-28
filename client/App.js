@@ -19,7 +19,7 @@ const App = () => (
     <div className="AppTitle">
       <img src="https://128121.selcdn.ru/react/logo.png" />
     </div>
-    <AppInteracive className="AppInteracive"/>
+    <AppInteracive />
   </div>
 );
 
