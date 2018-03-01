@@ -4,13 +4,6 @@ import PropTypes from 'prop-types'
 import InputRange from 'react-input-range';
 import debounce from 'lodash.debounce'
 
-Filter.propTypes = {
-  limits: PropTypes.object.isRequired,
-  filter: PropTypes.object.isRequired,
-  onFilterChange: PropTypes.func.isRequired
-}
-
-
 class Filter extends React.Component {
   constructor(props) {
     super(props);
@@ -70,6 +63,12 @@ class Filter extends React.Component {
       </div>
     );
   }
+};
+
+Filter.propTypes = {
+  limits: PropTypes.object.isRequired,
+  filter: PropTypes.object.isRequired,
+  onFilterChange: PropTypes.func.isRequired
 };
 
 export default Filter;

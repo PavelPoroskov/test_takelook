@@ -78,8 +78,8 @@ let data = {
 
 let studios = data.studios.sort( (a,b) => a.price - b.price );
 
-let minprice = min( ...studios.map( studio => studio.price ) );
-let maxprice = max( ...studios.map( studio => studio.price ) );
+let minprice = Math.min( ...studios.map( studio => studio.price ) );
+let maxprice = Math.max( ...studios.map( studio => studio.price ) );
 if (!maxprice) {
   minprice = 0;
   maxprice = 0;
@@ -91,10 +91,10 @@ studios.forEach( o_studio => {
     obj[str_param] = true 
   }) 
 });
-let params = obj.keys().sort();
+let params = Object.keys(obj).sort();
 
 
-includesSubArr( arr, subArr ) {
+function includesSubArr( arr, subArr ) {
 
   for (let j=0; j < subArr.length; j++) {
     if (! arr.includes(subArr[j]) ){
@@ -105,7 +105,7 @@ includesSubArr( arr, subArr ) {
   return true;
 }
 
-intersectSubArr( arr, subArr ) {
+function intersectsSubArr( arr, subArr ) {
 
   for (let j=0; j < subArr.length; j++) {
     if (arr.includes(subArr[j]) ){

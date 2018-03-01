@@ -1,6 +1,6 @@
 import React from 'react'
 
-import AppInteracive from './AppInteracive'
+import AppInteracive from './AppInteractive'
 
 // const App = () => {
 

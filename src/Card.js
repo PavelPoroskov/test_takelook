@@ -1,10 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-
-Card.propTypes = {
-  studio: PropTypes.object.isRequired
-}
 
 const Card = ({studio}) => {
 
@@ -24,6 +20,10 @@ const Card = ({studio}) => {
       </div>
     </div>
   )
+};
+
+Card.propTypes = {
+  studio: PropTypes.object.isRequired
 };
 
 export default Card;

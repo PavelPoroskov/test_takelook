@@ -3,10 +3,6 @@ import PropTypes from 'prop-types'
 
 import Card from './Card'
 
-CardsArea.propTypes = {
-  studios: PropTypes.array.isRequired
-}
-
 const CardsArea = ({studios}) => (
 
   <div className="CardsArea">
@@ -16,5 +12,9 @@ const CardsArea = ({studios}) => (
     )}
   </div>
 );
+
+CardsArea.propTypes = {
+  studios: PropTypes.array.isRequired
+};
 
 export default CardsArea;
