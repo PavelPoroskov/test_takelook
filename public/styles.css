@@ -1,0 +1,49 @@
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+/*  width: 100%; */
+  max-width: 100%;  
+}
+
+.AppTitle > img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;  
+  width: 40%;
+}
+.CardsArea {
+/*  width: 85%;   
+  max-width: 50%; */ 
+}
+
+.Card {
+  max-width: 50%;  
+}
+
+/*
+.CardView {
+  max-width: 50%;  
+  width: inherit; 
+  max-width: 100%;
+}
+*/
+
+.CardView > img {
+/* max-width: 50%;  
+  width: inherit; */
+  max-width: 100%;
+  object-fit: scale-down;
+}
+
+.CardName {
+  text-align: center;
+}
+
+
+.Filter {
+  max-width: 20%;  
+}

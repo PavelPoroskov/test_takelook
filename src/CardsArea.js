@@ -6,9 +6,8 @@ import Card from './Card'
 const CardsArea = ({studios}) => (
 
   <div className="CardsArea">
-    {studios.map( studio => (
+    {studios.map( studio => 
         <Card studio={studio} key={studio.id} />
-        )
     )}
   </div>
 );
