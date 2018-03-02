@@ -54,12 +54,12 @@ class Filter extends React.Component {
 
     return (
       <div className="Filter">
-        {/*<SmartSearch allparams={allparams} /> */}
+        {/*<SmartSearch allparams={allparams} />
         <InputRange
           minValue={limit_minprice}
           maxValue={limit_maxprice}
           value={pricerange}
-          onChange={debounce(this.handleRangeChange, 500)} />
+          onChange={debounce(this.handleRangeChange, 500)} />  */}
       </div>
     );
   }

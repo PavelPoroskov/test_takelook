@@ -147,19 +147,117 @@ class AppInteractive extends React.Component {
     super(props);
 
     this.handleFilterChange = this.handleFilterChange.bind(this);
+    // this.state = { 
+    //   studios,
+    //   limits: {
+    //     minprice,
+    //     maxprice,
+    //     params
+    //   },
+    //   filter: {
+    //     minprice,
+    //     maxprice,
+    //     params: [],
+    //   }
+    // };
     this.state = { 
-      studios,
+      loadstart: false,
+      // loadend: false,
+      // loadsuccess: false,
+      loadend: true,
+      loadsuccess: true,
+
+      studios:[],
       limits: {
-        minprice,
-        maxprice,
-        params
+        minprice: 0,
+        maxprice: 0,
+        params: []
       },
       filter: {
-        minprice,
-        maxprice,
-        params: [],
+        minprice: 0,
+        maxprice: 0,
+        params: []
       }
     };
+
+//    fetch();
+  }
+
+
+  componentDidMount() {
+
+    let url = 'http://localhost:8080/studios.json';
+
+    let sHref = localation.href;
+    let pos = sHref.lastIndexOf("/");
+    if ( 0 <= pos ) {
+      url = sHref.slice(0,pos+1) + 'studios.json';
+    }
+
+    const msTimeout = 1000;
+
+
+    this.setState( prevState => ({
+      loadstart: true
+    });
+
+
+    var promiseFetch = fetch(url);
+
+    var timeoutErr = new Promise( (resolve, reject) => {
+      setTimeout( reject, msTimeout, "Timeout error" );
+    });
+
+    Promise.race([promiseFetch, timeoutErr])
+    .then( response => response.json() )
+    .then( responseJSON => {
+
+      let studios = responseJSON.studios.sort( (a,b) => a.price - b.price );
+
+      let minprice = Math.min( ...studios.map( studio => studio.price ) );
+      let maxprice = Math.max( ...studios.map( studio => studio.price ) );
+      if (!maxprice) {
+        minprice = 0;
+        maxprice = 0;
+      }
+
+      let obj = {};
+      studios.forEach( o_studio => {
+        o_studio.params.forEach( str_param => { 
+          obj[str_param] = true 
+        }) 
+      });
+      let params = Object.keys(obj).sort();
+
+
+      this.setState( prevState => ({
+          loadend: true,
+          loadsuccess: true,
+          studios,
+          limits: {
+            minprice,
+            maxprice,
+            params
+          },
+          filter: {
+            minprice,
+            maxprice,
+            params: [],
+          }
+      });
+
+    })
+    .catch( error => {
+
+      console.error(error);
+
+      this.setState( prevState => ({
+          loadend: true,
+          loadsuccess: false
+      });
+
+    });
+
   }
 
   handleFilterChange(newFilter) {
@@ -174,19 +272,34 @@ class AppInteractive extends React.Component {
 
   render() {
 //    const all_studios = this.state.studios;
+
+    const loadstart = this.state.loadstart;
+    const loadend = this.state.loadend;
+    const loadsuccess = this.state.loadsuccess;
+
     const limits = this.state.limits;
     const filter = this.state.filter;
-
     const filtered_studios = selFilteredStudios(this.state);
 
     return (
       <div className="AppInteractive">
+
+        { (loadstart && !loadend) &&
+        <div className="Message MessageInfo">Loading ...</div>
+        }
+
+        { (loadend && !loadsuccess) &&
+        <div className="Message MessageError">Error on loading.</div>
+        }
+
+        { (loadend && loadsuccess) &&
         <CardsArea studios={filtered_studios}/>
         <Filter 
           limits={limits} 
           filter={filter}
           onFilterChange={this.handleFilterChange} 
           />
+        }
       </div>
     );
   }
