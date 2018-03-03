@@ -8,92 +8,6 @@ import CardsArea from './CardsArea'
 import Filter from './Filter'
 
 
-let data = {
-  "studios":[{
-    "id":12,
-    "name": "Фламинго",
-    "price": 1200,
-    "view":["https://128121.selcdn.ru/react/1.jpg"],
-    "params":["птица","окно"]
-    },
-    {
-    "id":13,
-    "name": "Семейная",
-    "price": 1800,
-    "view":["https://128121.selcdn.ru/react/2.jpg"],
-    "params":["камин","качель","окно"]
-    },
-    {
-    "id":15,
-    "name": "Ночная",
-    "price": 2000,
-    "view":["https://128121.selcdn.ru/react/3.jpg"],
-    "params":["зеркало","стул","портрет"]
-    },
-    {
-    "id":122,
-    "name": "Калибри",
-    "price": 1300,
-    "view":["https://128121.selcdn.ru/react/4.jpg"],
-    "params":["картина","слон","стекло"]
-    },
-    {
-    "id":123,
-    "name": "Стильная",
-    "price": 1500,
-    "view":["https://128121.selcdn.ru/react/5.jpg"],
-    "params":["занавес","тумба"]
-    },
-    {
-    "id":100,
-    "name": "Лофт",
-    "price": 2200,
-    "view":["https://128121.selcdn.ru/react/6.jpg"],
-    "params":[]
-    },
-    {
-    "id":178,
-    "name": "Таганка",
-    "price": 1100,
-    "view":["https://128121.selcdn.ru/react/7.jpg"],
-    "params":["картина","обои","окно"]
-    },
-    {
-    "id":1221,
-    "name": "Лондон",
-    "price": 1250,
-    "view":["https://128121.selcdn.ru/react/8.jpg"],
-    "params":["камин","картина","окно"]
-    },
-    {
-    "id":1891,
-    "name": "Уют",
-    "price": 1450,
-    "view":["https://128121.selcdn.ru/react/9.jpg"],
-    "params":["камин","обои","картина"]
-    }
-    ]
-};
-
-
-let studios = data.studios.sort( (a,b) => a.price - b.price );
-
-let minprice = Math.min( ...studios.map( studio => studio.price ) );
-let maxprice = Math.max( ...studios.map( studio => studio.price ) );
-if (!maxprice) {
-  minprice = 0;
-  maxprice = 0;
-}
-
-let obj = {};
-studios.forEach( o_studio => {
-  o_studio.params.forEach( str_param => { 
-    obj[str_param] = true 
-  }) 
-});
-let params = Object.keys(obj).sort();
-
-
 function includesSubArr( arr, subArr ) {
 
   for (let j=0; j < subArr.length; j++) {
@@ -147,25 +61,11 @@ class AppInteractive extends React.Component {
     super(props);
 
     this.handleFilterChange = this.handleFilterChange.bind(this);
-    // this.state = { 
-    //   studios,
-    //   limits: {
-    //     minprice,
-    //     maxprice,
-    //     params
-    //   },
-    //   filter: {
-    //     minprice,
-    //     maxprice,
-    //     params: [],
-    //   }
-    // };
+
     this.state = { 
       loadstart: false,
-      // loadend: false,
-      // loadsuccess: false,
-      loadend: true,
-      loadsuccess: true,
+      loadend: false,
+      loadsuccess: false,
 
       studios:[],
       limits: {
@@ -179,8 +79,6 @@ class AppInteractive extends React.Component {
         params: []
       }
     };
-
-//    fetch();
   }
 
 
@@ -188,7 +86,7 @@ class AppInteractive extends React.Component {
 
     let url = 'http://localhost:8080/studios.json';
 
-    let sHref = localation.href;
+    let sHref = location.href;
     let pos = sHref.lastIndexOf("/");
     if ( 0 <= pos ) {
       url = sHref.slice(0,pos+1) + 'studios.json';
@@ -198,8 +96,9 @@ class AppInteractive extends React.Component {
 
 
     this.setState( prevState => ({
-      loadstart: true
-    });
+        loadstart: true
+      })
+    );
 
 
     var promiseFetch = fetch(url);
@@ -244,7 +143,8 @@ class AppInteractive extends React.Component {
             maxprice,
             params: [],
           }
-      });
+        })
+      );
 
     })
     .catch( error => {
@@ -254,7 +154,8 @@ class AppInteractive extends React.Component {
       this.setState( prevState => ({
           loadend: true,
           loadsuccess: false
-      });
+        })
+      );
 
     });
 
@@ -271,7 +172,6 @@ class AppInteractive extends React.Component {
   }
 
   render() {
-//    const all_studios = this.state.studios;
 
     const loadstart = this.state.loadstart;
     const loadend = this.state.loadend;
@@ -293,12 +193,14 @@ class AppInteractive extends React.Component {
         }
 
         { (loadend && loadsuccess) &&
-        <CardsArea studios={filtered_studios}/>
-        <Filter 
-          limits={limits} 
-          filter={filter}
-          onFilterChange={this.handleFilterChange} 
-          />
+        <React.Fragment>
+          <CardsArea studios={filtered_studios} />
+          <Filter 
+            limits={limits} 
+            filter={filter}
+            onFilterChange={this.handleFilterChange} 
+            />
+        </React.Fragment>
         }
       </div>
     );

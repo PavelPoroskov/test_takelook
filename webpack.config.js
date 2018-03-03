@@ -7,13 +7,14 @@ module.exports = {
   mode:'development',
   devServer:  {   // no production
     contentBase:'./public'      // no production
+//    ,https:
   },                           // no production
-  devtool: 'inline-source-map',  // no production
+  // devtool: 'inline-source-map',  // no production
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'public'),
-//    publicPath: '/'
+    publicPath: '/'
   },
   externals: { // Use external version of React
     "react": "React",
