@@ -34,3 +34,6 @@ less
 css modules
 styled components
 add https (webpack-devserver https, self-signed certificate)
+es6 modules
+
+dont show image before full load

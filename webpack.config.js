@@ -35,8 +35,9 @@ module.exports = {
                     "browsers": ["last 2 versions"]
                   }
                 }],
-                "stage-2"               
-              ]
+//                "stage-2"               
+            ],
+            plugins: ["transform-object-rest-spread"]            
           }
         }
       }
