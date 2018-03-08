@@ -1,11 +1,12 @@
 
 import React from 'react'
-import PropTypes from 'prop-types'
+//import PropTypes from 'prop-types'
 
+import { Row, Col } from 'antd';
 import { createSelector } from 'reselect'
 
 import CardsArea from './CardsArea'
-import Filter from './Filter'
+import FilterArea from './FilterArea'
 
 
 function includesSubArr( arr, subArr ) {
@@ -86,7 +87,7 @@ class AppInteractive extends React.Component {
 
     let url = 'http://localhost:8080/studios.json';
 
-    let sHref = location.href;
+    let sHref = window.location.href;
     let pos = sHref.lastIndexOf("/");
     if ( 0 <= pos ) {
       url = sHref.slice(0,pos+1) + 'studios.json';
@@ -193,14 +194,18 @@ class AppInteractive extends React.Component {
         }
 
         { (loadend && loadsuccess) &&
-        <React.Fragment>
-          <CardsArea studios={filtered_studios} />
-          <Filter 
-            limits={limits} 
-            filter={filter}
-            onFilterChange={this.handleFilterChange} 
-            />
-        </React.Fragment>
+        <Row>
+          <Col span={18}>
+            <CardsArea studios={filtered_studios} />
+          </Col>
+          <Col span={6}>
+            <FilterArea 
+              limits={limits} 
+              filter={filter}
+              onFilterChange={this.handleFilterChange} 
+              />
+          </Col>
+        </Row>
         }
       </div>
     );

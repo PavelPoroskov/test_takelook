@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Card from './Card'
+import MyCard from './MyCard'
 
 const CardsArea = ({studios}) => (
 
   <div className="CardsArea">
     {studios.map( studio => 
-        <Card studio={studio} key={studio.id} />
+      <MyCard studio={studio} key={studio.id}/>
     )}
   </div>
 );

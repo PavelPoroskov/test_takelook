@@ -1,14 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import InputRange from 'react-input-range';
-import debounce from 'lodash.debounce'
+import RangeSlider from './RangeSlider'
 
 class Filter extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleRangeChange = this.handleRangeChange.bind(this);
+//    this.handleRangeChange = this.handleRangeChange.bind(this);
     this.handleParamsChange = this.handleParamsChange.bind(this);
 
     // this.state = { 
@@ -20,14 +19,14 @@ class Filter extends React.Component {
     // };
   }
 
-  handleRangeChange(newRange) {
+//   handleRangeChange([vmin,vmax]) {
 
-//    this.setState({ pricerange: newRange });
-    this.props.onFilterChange({
-      minprice: newRange.min,
-      maxprice: newRange.max
-    });
-  }
+// //    this.setState({ pricerange: newRange });
+//     this.props.onFilterChange({
+//       minprice: vmin,
+//       maxprice: vmax
+//     });
+//   }
 
   handleParamsChange(newParams) {
 
@@ -37,33 +36,39 @@ class Filter extends React.Component {
     });
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.limits !== nextProps.limits) {
+      return true;
+    }
+    return false;
+  }
+
   render() {
     console.log("Filter::render()");
 
 //    const all_studios = this.state.studios;
     const limits = this.props.limits;
-    const { limit_minprice, limit_maxprice, allparams } = limits;
+    const { minprice: lmin, maxprice: lmax, params: allparams } = limits;
 
     const filter = this.props.filter;
+    const { minprice: vmin, maxprice: vmax, params } = filter;
 
-    const pricerange = {
-      min: filter.minprice,
-      max: filter.maxprice
-    };
-    const params = filter.params;
+    const stPadding = { 'padding': '16px' };    
 
     return (
-      <div className="Filter">
-        {/*<SmartSearch allparams={allparams} />
-        <InputRange
-          minValue={limit_minprice}
-          maxValue={limit_maxprice}
-          value={pricerange}
-          onChange={debounce(this.handleRangeChange, 500)} />  */}
+      <div className="Filter" style={stPadding}>
+        <RangeSlider 
+          title="Стоимость"
+          limits={[lmin, lmax]}
+          value={[vmin, vmax]} 
+          onFilterChange={this.props.onFilterChange}
+        />
       </div>
     );
   }
 };
+
+
 
 Filter.propTypes = {
   limits: PropTypes.object.isRequired,
