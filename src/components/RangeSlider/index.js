@@ -10,20 +10,29 @@ class RangeSlider extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
 
+    const [ lmin, lmax ] = this.props.limits;
+
+    let [ imin, imax ] = [ lmin, lmax ];
+
+    if (this.props.initvalue) {
+      let [ tmin, tmax ] = this.props.initvalue;
+      if ( !(tmin === undefined || tmax === undefined) ) {
+        [ imin, imax ] = [ tmin, tmax ];
+      }
+    }
+
     //value = [100,1100];
     this.state = { 
-      value: props.value
+      initvalue: [ imin, imax ],
+      value: [ imin, imax ]
     }; 
   }
 
-  handleChange([vmin,vmax]) {
+  handleChange(value) {
     console.log("RangeSlider.handleChange()");
-    this.setState( { value: [vmin,vmax] } );
+    this.setState( { value: value } );
 
-    this.props.onFilterChange({
-      minprice: vmin,
-      maxprice: vmax
-    });
+    this.props.onChange(value);
   }
 
   // shouldComponentUpdate(nextProps, nextState) {
@@ -44,8 +53,8 @@ class RangeSlider extends React.Component {
     const [ vmin, vmax ] = this.state.value;
 
 //    const [ vmin, vmax ] = this.props.value;
-    const stBold = { 'font-weight': 'bold' };
-    const stRight = { 'text-align': 'right' };
+    const stBold = { 'fontWeight': 'bold' };
+    const stRight = { 'textAlign': 'right' };
 
     return (
       <React.Fragment>
@@ -59,12 +68,12 @@ class RangeSlider extends React.Component {
         </Row>
         <Row>
           <Col span={24}>
-            <Slider range  
+            <Slider range inclusive 
               min={lmin}
               max={lmax}
               tipFormatter={null}
-              defaultValue={this.props.value} 
-              onAfterChange={debounce(this.handleChange,250)}
+              defaultValue={this.state.initvalue} 
+              onChange={debounce(this.handleChange,350)}
             />
           </Col>
         </Row>
@@ -72,6 +81,9 @@ class RangeSlider extends React.Component {
     );
   }
 };
+
+//onAfterChange={debounce(this.handleChange,500)}
+
 
 // RangeSlider.handleChange()
 // RangeSlider::render()
@@ -81,8 +93,8 @@ class RangeSlider extends React.Component {
 RangeSlider.propTypes = {
   title: PropTypes.string.isRequired,
   limits: PropTypes.array.isRequired,
-//  value: PropTypes.array.isRequired,
-  onFilterChange: PropTypes.func.isRequired
+  initvalue: PropTypes.array,
+  onChange: PropTypes.func.isRequired
 };
 
 export default RangeSlider;

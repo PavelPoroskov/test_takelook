@@ -2,11 +2,12 @@
 import React from 'react'
 //import PropTypes from 'prop-types'
 
-import { Row, Col } from 'antd';
+//import { Row, Col } from 'antd';
+import { Col } from 'antd';
 import { createSelector } from 'reselect'
 
-import CardsArea from './CardsArea'
-import FilterArea from './FilterArea'
+import CardsArea from './components/CardsArea'
+import Filter from './components/Filter'
 
 
 function includesSubArr( arr, subArr ) {
@@ -20,41 +21,97 @@ function includesSubArr( arr, subArr ) {
   return true;
 }
 
-function intersectsSubArr( arr, subArr ) {
+// function intersectsSubArr( arr, subArr ) {
 
-  for (let j=0; j < subArr.length; j++) {
-    if (arr.includes(subArr[j]) ){
-      return true;
-    }
-  }
+//   for (let j=0; j < subArr.length; j++) {
+//     if (arr.includes(subArr[j]) ){
+//       return true;
+//     }
+//   }
 
-  return false;
-}
+//   return false;
+// }
 
 const selStudios = state => state.studios;
-const selMinPrice = state => state.filter.minprice;
-const selMaxPrice = state => state.filter.maxprice;
-const selParams = state => state.filter.params;
-const selFilteredByPriceStep1 = createSelector(
+const selMinPrice = state => {
+  if (state.filter && state.filter.pricerange 
+    && state.filter.pricerange[0] !== undefined ) {
+    return state.filter.pricerange[0];
+  }else{
+    return undefined;
+  }  
+};
+const selMaxPrice = state => {
+  if (state.filter && state.filter.pricerange 
+    && state.filter.pricerange[1] !== undefined ) {
+    return state.filter.pricerange[1];
+  }else{
+    return undefined;
+  }  
+};
+const selTags = state => state.filter.tags;
+const selSortedStudios = createSelector(
   selStudios,
-  selMinPrice,
-  selMaxPrice,
-  (studios, minprice, maxprice) => 
-    studios.filter( studio => 
-      minprice <= studio.price && studio.price <= maxprice )
+  studios => studios.sort( (a,b) => a.price - b.price )
 );
-const selFilteredByTagsStep2 = createSelector(
-  selFilteredByPriceStep1,
-  selParams,
-  (studios, filter) => {
-    if (!filter) {
+const selFilteredByTagsStep = createSelector(
+  selSortedStudios,
+  selTags,
+  (studios, tags) => {
+    if (!tags) {
       return studios;
     }
 
-    return studios.filter( studio => includesSubArr( studio.params, filter ) );
+    return studios.filter( studio => includesSubArr( studio.params, tags ) );
   }
 );
-const selFilteredStudios = selFilteredByTagsStep2; 
+const selFilteredByPriceStep = createSelector(
+  selFilteredByTagsStep,
+  selMinPrice,
+  selMaxPrice,
+  (studios, minprice, maxprice) => {
+    if (minprice === undefined || maxprice === undefined) {
+      return studios;
+    }
+
+    return studios.filter( studio => 
+      minprice <= studio.price && studio.price <= maxprice )
+  }
+);
+const selFilteredStudios = selFilteredByPriceStep; 
+
+const selLimits = createSelector(
+  selSortedStudios,
+  studios => {
+
+    // let minprice = Math.min( ...studios.map( studio => studio.price ) );
+    // let maxprice = Math.max( ...studios.map( studio => studio.price ) );
+    // if (!maxprice) {
+    //   minprice = 0;
+    //   maxprice = 0;
+    // }
+
+    let minprice = 0;
+    let maxprice = 0;
+    if ( 0 < studios.length ) {
+      minprice = studios[0].price;
+      maxprice = studios[studios.length-1].price;
+    }
+
+    let obj = {};
+    studios.forEach( o_studio => {
+      o_studio.params.forEach( str_param => { 
+        obj[str_param] = true 
+      }) 
+    });
+    let params = Object.keys(obj).sort();
+
+    return {
+      pricerange:[minprice,maxprice],
+      tags:params
+    };
+  }
+);
 
 
 class AppInteractive extends React.Component {
@@ -69,23 +126,21 @@ class AppInteractive extends React.Component {
       loadsuccess: false,
 
       studios:[],
-      limits: {
-        minprice: 0,
-        maxprice: 0,
-        params: []
-      },
-      filter: {
-        minprice: 0,
-        maxprice: 0,
-        params: []
-      }
+
+      filter: {}
+      // filter: {
+      //   minprice: 0,
+      //   maxprice: 0,
+      //   params: []
+      // }
     };
   }
 
 
   componentDidMount() {
 
-    let url = 'http://localhost:8080/studios.json';
+//    let url = 'http://localhost:8080/studios.json';
+    let url = '';
 
     let sHref = window.location.href;
     let pos = sHref.lastIndexOf("/");
@@ -112,38 +167,10 @@ class AppInteractive extends React.Component {
     .then( response => response.json() )
     .then( responseJSON => {
 
-      let studios = responseJSON.studios.sort( (a,b) => a.price - b.price );
-
-      let minprice = Math.min( ...studios.map( studio => studio.price ) );
-      let maxprice = Math.max( ...studios.map( studio => studio.price ) );
-      if (!maxprice) {
-        minprice = 0;
-        maxprice = 0;
-      }
-
-      let obj = {};
-      studios.forEach( o_studio => {
-        o_studio.params.forEach( str_param => { 
-          obj[str_param] = true 
-        }) 
-      });
-      let params = Object.keys(obj).sort();
-
-
       this.setState( prevState => ({
           loadend: true,
           loadsuccess: true,
-          studios,
-          limits: {
-            minprice,
-            maxprice,
-            params
-          },
-          filter: {
-            minprice,
-            maxprice,
-            params: [],
-          }
+          studios: responseJSON.studios
         })
       );
 
@@ -162,11 +189,11 @@ class AppInteractive extends React.Component {
 
   }
 
-  handleFilterChange(newFilter) {
+  handleFilterChange(addFilter) {
     this.setState( (prevState, props) => ({
         filter: {
           ...prevState.filter,
-          ...newFilter
+          ...addFilter
         }
       })
     );    
@@ -178,36 +205,34 @@ class AppInteractive extends React.Component {
     const loadend = this.state.loadend;
     const loadsuccess = this.state.loadsuccess;
 
-    const limits = this.state.limits;
-    const filter = this.state.filter;
+    const limits = selLimits(this.state);
+    //const filter = this.state.filter;
     const filtered_studios = selFilteredStudios(this.state);
 
     return (
-      <div className="AppInteractive">
+        <React.Fragment>
+          { (loadstart && !loadend) &&
+          <Col className="Message MessageInfo">Loading ...</Col>
+          }
 
-        { (loadstart && !loadend) &&
-        <div className="Message MessageInfo">Loading ...</div>
-        }
+          { (loadend && !loadsuccess) &&
+          <Col className="Message MessageError">Error on loading.</Col>
+          }
 
-        { (loadend && !loadsuccess) &&
-        <div className="Message MessageError">Error on loading.</div>
-        }
-
-        { (loadend && loadsuccess) &&
-        <Row>
-          <Col span={18}>
-            <CardsArea studios={filtered_studios} />
-          </Col>
-          <Col span={6}>
-            <FilterArea 
-              limits={limits} 
-              filter={filter}
-              onFilterChange={this.handleFilterChange} 
+          { (loadend && loadsuccess) &&
+          <React.Fragment>
+            <Col span={19}>
+              <CardsArea studios={filtered_studios} />
+            </Col>
+            <Col span={5}>
+              <Filter 
+                limits={limits} 
+                onFilterChange={this.handleFilterChange} 
               />
-          </Col>
-        </Row>
-        }
-      </div>
+            </Col>
+          </React.Fragment>
+          }
+        </React.Fragment>
     );
   }
 }

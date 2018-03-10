@@ -15,12 +15,15 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "babel-plugin-import": "^1.6.6",
     "babel-plugin-transform-es2015-computed-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "gh-pages": "^1.1.0",
     "react-app-rewire-less": "^2.1.1",
     "react-app-rewired": "^1.5.0"
   }

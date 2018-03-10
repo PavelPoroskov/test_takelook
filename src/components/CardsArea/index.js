@@ -1,15 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import MyCard from './MyCard'
+import { Row } from 'antd';
+
+import Card from '../Card'
+
+import './index.css'
+
 
 const CardsArea = ({studios}) => (
 
-  <div className="CardsArea">
+  <Row className="CardsArea">
     {studios.map( studio => 
-      <MyCard studio={studio} key={studio.id}/>
+      <Card studio={studio} key={studio.id}/>
     )}
-  </div>
+  </Row>
 );
 
 CardsArea.propTypes = {

@@ -1,0 +1,12 @@
+
+.FilterArea {
+  background-color: green;
+
+/*  display: flex; */
+}
+
+.FilterSubInput {
+  background-color: white;
+/*  max-width: 95%;*/
+  padding: 16px;
+}

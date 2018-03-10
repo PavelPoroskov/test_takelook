@@ -1,13 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Card } from 'antd';
-const { Meta } = Card;
+
+import { Card as AntdCard } from 'antd';
+
+import './index.css'
+
+const { Meta } = AntdCard;
 
 
-const MyCard = ({studio}) => {
 
-  const { name, view, price } = studio;
+const Card = ({studio}) => {
+
+  const { name, view } = studio;
+//  const { name, view, price } = studio;
   const url = view[0];
 
   // return (
@@ -24,21 +30,21 @@ const MyCard = ({studio}) => {
   //   </div>
   // )
 
-  const stCenter = { 'text-align': 'center' };
+  const stCenter = { 'textAlign': 'center' };
 
   return (
-    <Card style={{ width: 250 }}  
+    <AntdCard style={{ width: 250 }}  
       cover={<img alt={name} src={url} />}
     >
       <Meta title={name} style={stCenter}/>
-    </Card>
+    </AntdCard>
     )
-};
+}
 
 // loading
 
-MyCard.propTypes = {
+Card.propTypes = {
   studio: PropTypes.object.isRequired
 };
 
-export default MyCard;
+export default Card;

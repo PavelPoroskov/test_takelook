@@ -1,6 +1,10 @@
 import React from 'react'
 
+import { Row } from 'antd';
+
 import AppInteracive from './AppInteractive'
+
+import './App.css'
 
 // const App = () => {
 
@@ -16,10 +20,12 @@ import AppInteracive from './AppInteractive'
 
 const App = () => (
   <div className="App">
-    <div className="AppTitle">
-      <img src="https://128121.selcdn.ru/react/logo.png" />
-    </div>
-    <AppInteracive />
+    <Row className="AppLogo">
+      <img src="https://128121.selcdn.ru/react/logo.png" alt="Logo TakeLook"/>
+    </Row>
+    <Row className="AppMain">
+      <AppInteracive />
+    </Row>
   </div>
 );
 

@@ -1,0 +1,21 @@
+
+body {
+  background-color: gray;
+}
+
+.AppLogo {
+  height: 65px;  
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.AppLogo img {
+  max-height: 45%;
+}
+
+
+* {
+  box-sizing: border-box
+}
