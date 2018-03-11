@@ -4,8 +4,8 @@
   display: flex;
   flex-wrap: wrap;
 
-  justify-content: space-between; 
-/*  justify-content: space-evenly;
-  justify-content: space-around; 
-  justify-content: center; */
+/*  justify-content: space-between; -*/
+  justify-content: space-evenly; 
+/*  justify-content: space-around;  */
+/*  justify-content: center; */
 }

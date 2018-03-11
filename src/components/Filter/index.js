@@ -1,4 +1,5 @@
 import React from 'react'
+import ComponentWithClassName from '../ComponentWithClassName'
 import PropTypes from 'prop-types'
 
 //import { Row } from 'antd';
@@ -10,7 +11,13 @@ import FilterSubInput from './FilterSubInput'
 
 import './index.css'
 
-class Filter extends React.Component {
+class Filter extends ComponentWithClassName {
+  propTypes : {
+    onFilterChange: PropTypes.func.isRequired,
+    limits: PropTypes.object.isRequired,
+    initfilter: PropTypes.object
+  };
+
   constructor(props) {
     super(props);
 
@@ -42,7 +49,7 @@ class Filter extends React.Component {
     const ConPriceRangeSlider = this.ConPriceRangeSlider;
 
     return (
-      <div className={this.constructor.name}>
+      <div className={this.className}>
         <ConTagSearch />
         <ConPriceRangeSlider title="Стоимость" />
       </div>
@@ -50,12 +57,5 @@ class Filter extends React.Component {
   }
 };
 
-
-
-Filter.propTypes = {
-  onFilterChange: PropTypes.func.isRequired,
-  limits: PropTypes.object.isRequired,
-  initfilter: PropTypes.object
-};
 
 export default Filter;

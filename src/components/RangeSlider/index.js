@@ -1,10 +1,13 @@
 import React from 'react'
+import ComponentWithClassName from '../ComponentWithClassName'
 import PropTypes from 'prop-types'
 
 import { Slider } from 'antd';
 import debounce from 'lodash.debounce'
 
-class RangeSlider extends React.Component {
+import './index.css'
+
+class RangeSlider extends ComponentWithClassName {
   constructor(props) {
     super(props);
 
@@ -26,16 +29,10 @@ class RangeSlider extends React.Component {
       initvalue: [ imin, imax ],
       value: [ imin, imax ]
     }; 
-
-    let classname = this.constructor.name;
-    if (this.props.className) {
-      classname = '' + this.props.className + ' ' + classname;
-    }
-    this.classname = classname;
   }
 
   handleChange(value) {
-    console.log("RangeSlider.handleChange()");
+//    console.log("RangeSlider.handleChange()");
     this.setState( { value: value } );
 
     this.props.onChange(value);
@@ -50,7 +47,7 @@ class RangeSlider extends React.Component {
 
   render() {
 
-    console.log("RangeSlider::render()");
+//    console.log("RangeSlider::render()");
 
     const [ lmin, lmax ] = this.props.limits;
 
@@ -60,7 +57,7 @@ class RangeSlider extends React.Component {
 
 //    const [ vmin, vmax ] = this.props.value;
     const stDiv1 = { 
-      'margin-bottom': '24px'
+      'marginBottom': '24px'
     };
     const stDiv11 = { 
       width: '50%',
@@ -77,7 +74,7 @@ class RangeSlider extends React.Component {
     };
 
     return (
-      <div className={this.classname}>
+      <div className={this.className}>
         <div style={stDiv1}>
           <div style={stDiv11}>
             {this.props.title}
@@ -86,7 +83,6 @@ class RangeSlider extends React.Component {
             { `${vmin}  -  ${vmax}` }
           </div>
         </div>
-        <div>
           <div style={stDiv2}>
             <Slider range inclusive 
               min={lmin}
@@ -96,14 +92,12 @@ class RangeSlider extends React.Component {
               onChange={debounce(this.handleChange,350)}
             />
           </div>
-        </div>
       </div>
     );
   }
 };
 
 //onAfterChange={debounce(this.handleChange,500)}
-
 
 // RangeSlider.handleChange()
 // RangeSlider::render()

@@ -14,10 +14,23 @@
 
 .AppInteractive {
   display: flex;
+
+  align-items: center;
+  justify-content: center;
 }
 .CardsArea {
   flex: 0 0 75%;
+  align-self: start;
 }
 .Filter {
   flex: 1;
+  align-self: start;
 }
+
+/* .FilterWidth const, */
+
+/*
+.Message {
+
+}
+*/

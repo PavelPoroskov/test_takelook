@@ -1,41 +1,24 @@
 import React from 'react'
+import ComponentWithClassName from '../ComponentWithClassName'
 
 import AppInteracive from '../AppInteractive'
 
 import './index.css'
 
-// const App = () => {
 
-//   return (
-//     <div className="App">
-//       <div className="AppTitle">
-//         <img src="https://128121.selcdn.ru/react/logo.png" />
-//       </div>
-//       <AppInteracive />
-//     </div>
-//   );
-// }
+class App extends ComponentWithClassName {
 
-// const App = () => (
-//   <div className="App">
-//     <div>{this.name}</div>
-//     <div className="AppLogo">
-//       <img src="https://128121.selcdn.ru/react/logo.png" alt="Logo TakeLook"/>
-//     </div>
-//     <AppInteracive />
-//   </div>
-// );
+  render() {
+    return (
 
-function App() {
-  return (
-    <div className="App">
-      <div className="AppLogo">
-        <img src="https://128121.selcdn.ru/react/logo.png" alt="Logo TakeLook"/>
+      <div className={this.className}>
+        <div className="AppLogo">
+          <img src="https://128121.selcdn.ru/react/logo.png" alt="Logo TakeLook"/>
+        </div>
+        <AppInteracive />
       </div>
-      <AppInteracive />
-    </div>
-  )
-};
-
+    );
+  }
+}
 
 export default App;

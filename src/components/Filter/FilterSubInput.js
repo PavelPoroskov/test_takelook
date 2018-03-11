@@ -1,9 +1,10 @@
 import React from 'react'
+import ComponentWithClassName from '../ComponentWithClassName'
 
 function FilterSubInput (WrappedComponent, strFilterField,
   limits, changeFilter, initvalue ) {
 
-  const newComponent = class extends React.Component {
+  const FilterSubInput_ = class extends ComponentWithClassName {
     constructor(props) {
       super(props);
 
@@ -22,7 +23,7 @@ function FilterSubInput (WrappedComponent, strFilterField,
       // ... and renders the wrapped component with the fresh data!
       // Notice that we pass through any additional props
       return (
-        <WrappedComponent className="FilterSubInput"
+        <WrappedComponent className={this.className}
           limits={limits[strFilterField]}
           onChange={this.handleChange}
           initvalue={initvalue[strFilterField]} 
@@ -37,9 +38,9 @@ function FilterSubInput (WrappedComponent, strFilterField,
     return Component.displayName || Component.name || 'Component';
   }
   
-  newComponent.displayName = `FilterSubInput(${getDisplayName(WrappedComponent)})`;
+  FilterSubInput_.displayName = `FilterSubInput_(${getDisplayName(WrappedComponent)})`;
 
-  return newComponent;
+  return FilterSubInput_;
 }
 
 export default FilterSubInput;
