@@ -33,7 +33,8 @@ const Card = ({studio}) => {
   const stCenter = { 'textAlign': 'center' };
 
   return (
-    <AntdCard style={{ width: 250 }}  
+    <AntdCard className="Card" 
+      style={{ width: 250 }}  
       cover={<img alt={name} src={url} />}
     >
       <Meta title={name} style={stCenter}/>

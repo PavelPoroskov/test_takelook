@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Slider, Row, Col } from 'antd';
+import { Slider } from 'antd';
 import debounce from 'lodash.debounce'
 
 class RangeSlider extends React.Component {
@@ -26,6 +26,12 @@ class RangeSlider extends React.Component {
       initvalue: [ imin, imax ],
       value: [ imin, imax ]
     }; 
+
+    let classname = this.constructor.name;
+    if (this.props.className) {
+      classname = '' + this.props.className + ' ' + classname;
+    }
+    this.classname = classname;
   }
 
   handleChange(value) {
@@ -53,21 +59,35 @@ class RangeSlider extends React.Component {
     const [ vmin, vmax ] = this.state.value;
 
 //    const [ vmin, vmax ] = this.props.value;
-    const stBold = { 'fontWeight': 'bold' };
-    const stRight = { 'textAlign': 'right' };
+    const stDiv1 = { 
+      'margin-bottom': '24px'
+    };
+    const stDiv11 = { 
+      width: '50%',
+      float: 'left',
+      'fontWeight': 'bold'
+    };
+    const stDiv12 = { 
+      width: '50%', 
+      float: 'left',
+      'textAlign': 'right'
+    };
+    const stDiv2 = { 
+      width: '100%' 
+    };
 
     return (
-      <React.Fragment>
-        <Row>
-          <Col span={12} style={stBold}>
+      <div className={this.classname}>
+        <div style={stDiv1}>
+          <div style={stDiv11}>
             {this.props.title}
-          </Col>
-          <Col span={12} style={stRight}>
-            { `${vmin} - ${vmax}` }
-          </Col>
-        </Row>
-        <Row>
-          <Col span={24}>
+          </div>
+          <div style={stDiv12}>
+            { `${vmin}  -  ${vmax}` }
+          </div>
+        </div>
+        <div>
+          <div style={stDiv2}>
             <Slider range inclusive 
               min={lmin}
               max={lmax}
@@ -75,9 +95,9 @@ class RangeSlider extends React.Component {
               defaultValue={this.state.initvalue} 
               onChange={debounce(this.handleChange,350)}
             />
-          </Col>
-        </Row>
-      </React.Fragment>
+          </div>
+        </div>
+      </div>
     );
   }
 };

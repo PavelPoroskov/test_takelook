@@ -39,3 +39,9 @@ add https (webpack-devserver https, self-signed certificate)
 es6 modules
 
 dont show image before full load
+
+
+with redux
+)connect redux store in App.js
+)don't conduct data from pairent component to child
+)children itself get from redux

@@ -42,7 +42,7 @@ class Filter extends React.Component {
     const ConPriceRangeSlider = this.ConPriceRangeSlider;
 
     return (
-      <div className="FilterArea" >
+      <div className={this.constructor.name}>
         <ConTagSearch />
         <ConPriceRangeSlider title="Стоимость" />
       </div>

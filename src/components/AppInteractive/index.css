@@ -1,0 +1,23 @@
+
+
+
+/*.CardsArea {
+  width: 75%;
+  float: left;
+}
+
+.Filter {
+  width:25%; 
+  float:left;
+}
+*/
+
+.AppInteractive {
+  display: flex;
+}
+.CardsArea {
+  flex: 0 0 75%;
+}
+.Filter {
+  flex: 1;
+}

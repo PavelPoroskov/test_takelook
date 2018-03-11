@@ -1,14 +1,12 @@
 
 import React from 'react'
-//import PropTypes from 'prop-types'
-
-//import { Row, Col } from 'antd';
-import { Col } from 'antd';
+//import PropTypes from 'prop-types'   
 import { createSelector } from 'reselect'
 
-import CardsArea from './components/CardsArea'
-import Filter from './components/Filter'
+import CardsArea from '../CardsArea'
+import Filter from '../Filter'
 
+import './index.css'
 
 function includesSubArr( arr, subArr ) {
 
@@ -210,29 +208,26 @@ class AppInteractive extends React.Component {
     const filtered_studios = selFilteredStudios(this.state);
 
     return (
-        <React.Fragment>
-          { (loadstart && !loadend) &&
-          <Col className="Message MessageInfo">Loading ...</Col>
-          }
+  
+      <div className={this.constructor.name}>
+        { (loadstart && !loadend) &&
+        <div className="Message MessageInfo">Loading ...</div>
+        }
 
-          { (loadend && !loadsuccess) &&
-          <Col className="Message MessageError">Error on loading.</Col>
-          }
+        { (loadend && !loadsuccess) &&
+        <div className="Message MessageError">Error on loading.</div>
+        }
 
-          { (loadend && loadsuccess) &&
+        { (loadend && loadsuccess) &&
           <React.Fragment>
-            <Col span={19}>
-              <CardsArea studios={filtered_studios} />
-            </Col>
-            <Col span={5}>
-              <Filter 
-                limits={limits} 
-                onFilterChange={this.handleFilterChange} 
-              />
-            </Col>
+            <CardsArea studios={filtered_studios} />
+            <Filter 
+              limits={limits} 
+              onFilterChange={this.handleFilterChange} 
+            />
           </React.Fragment>
-          }
-        </React.Fragment>
+        }
+      </div>
     );
   }
 }

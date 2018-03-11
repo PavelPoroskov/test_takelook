@@ -22,13 +22,11 @@ function FilterSubInput (WrappedComponent, strFilterField,
       // ... and renders the wrapped component with the fresh data!
       // Notice that we pass through any additional props
       return (
-        <div className="FilterSubInput"> 
-          <WrappedComponent 
-            limits={limits[strFilterField]}
-            onChange={this.handleChange}
-            initvalue={initvalue[strFilterField]} 
-            {...this.props} />
-        </div>
+        <WrappedComponent className="FilterSubInput"
+          limits={limits[strFilterField]}
+          onChange={this.handleChange}
+          initvalue={initvalue[strFilterField]} 
+          {...this.props} />
       );
     }
 

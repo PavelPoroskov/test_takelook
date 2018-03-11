@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Row } from 'antd';
 //import debounce from 'lodash.debounce'
 
 export default 
@@ -33,6 +32,12 @@ class TagSearch extends React.Component {
       initvalue: this.props.initvalue || [],
       value: this.props.initvalue || []
     }; 
+
+    let classname = this.constructor.name;
+    if (this.props.className) {
+      classname = '' + this.props.className + ' ' + classname;
+    }
+    this.classname = classname;
   }
 
   handleChange(value) {
@@ -54,12 +59,8 @@ class TagSearch extends React.Component {
     console.log("TagSearch::render()");
 
     return (
-      <React.Fragment>
-        <Row>
-        </Row>
-        <Row>
-        </Row>
-      </React.Fragment>
+      <div className={this.classname}>
+      </div>
     );
   }
 };
