@@ -1,4 +1,4 @@
-# test_takelook
+# test_takelook //https://github.com/devjsru/react_test
 test task for react
 
 

@@ -5,18 +5,22 @@ import AppInteracive from '../AppInteractive'
 
 import './index.css'
 
+import { Layout } from 'antd'
+const {  Header } = Layout;
 
 class App extends ComponentWithClassName {
 
   render() {
     return (
 
-      <div className={this.className}>
-        <div className="AppLogo">
-          <img src="https://128121.selcdn.ru/react/logo.png" alt="Logo TakeLook"/>
-        </div>
+      <Layout>
+        <Header>
+          <div className="logo">
+            <img src="https://128121.selcdn.ru/react/logo.png" alt="Logo TakeLook"/>
+          </div>
+        </Header>
         <AppInteracive />
-      </div>
+      </Layout>
     );
   }
 }

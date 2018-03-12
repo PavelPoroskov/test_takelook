@@ -8,6 +8,8 @@ import Filter from '../Filter'
 import { selFilteredStudios, selLimits } from './selectors'
 import './index.css'
 
+import { Layout } from 'antd'
+const {  Sider, Content } = Layout;
 
 class AppInteractive extends ComponentWithClassName {
   constructor(props) {
@@ -101,7 +103,7 @@ class AppInteractive extends ComponentWithClassName {
 
     return (
   
-      <div className={this.className}>
+      <Layout>
         { (loadstart && !loadend) &&
         <div className="Message MessageInfo">Loading ...</div>
         }
@@ -112,14 +114,18 @@ class AppInteractive extends ComponentWithClassName {
 
         { (loadend && loadsuccess) &&
           <React.Fragment>
-            <CardsArea studios={filtered_studios} />
-            <Filter 
-              limits={limits} 
-              onFilterChange={this.handleFilterChange} 
-            />
+            <Content>
+              <CardsArea studios={filtered_studios} />
+            </Content>
+            <Sider>
+              <Filter 
+                limits={limits} 
+                onFilterChange={this.handleFilterChange} 
+              />
+            </Sider>
           </React.Fragment>
         }
-      </div>
+      </Layout>
     );
   }
 }
