@@ -4,7 +4,7 @@
 
 demo: https://pavelporoskov.github.io/test_takelook/
 
-Использует: react, reselect, antd, lodash.debounce
+Использует: react, reselect, antd, lodash.debounce, css flexbox.
 
 
 # Постановка задачи
