@@ -49,7 +49,7 @@ class Filter extends React.Component {
     const ConPriceRangeSlider = this.ConPriceRangeSlider;
 
     return (
-      <div className="CardsAreaa">
+      <div className="Filter">
       {/*  <ConTagSearch /> */}
         <ConPriceRangeSlider title="Стоимость" className="FilterSubInput"/>
       </div>

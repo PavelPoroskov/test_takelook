@@ -76,7 +76,7 @@ class RangeSlider extends React.Component {
     };
 
     return (
-      <div className="FilterSubInput PriceRange">
+      <div className="FilterSubInput RangeSlider">
         <div style={stDiv1}>
           <div style={stDiv11}>
             {this.props.title}
