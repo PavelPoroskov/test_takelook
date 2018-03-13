@@ -2,7 +2,7 @@
   "name": "test_takelook",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://PavelPoroskov.github.io/",
+  "homepage": "http://PavelPoroskov.github.io/test_takelook",
   "dependencies": {
     "antd": "^3.2.3",
     "lodash.debounce": "^4.0.8",
