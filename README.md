@@ -3,6 +3,7 @@
 с сортировкой и фильтрацией, верстка.
 
 demo: https://pavelporoskov.github.io/test_takelook/
+
 Использует: react, reselect, antd, lodash.debounce
 
 
