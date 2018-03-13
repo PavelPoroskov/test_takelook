@@ -1,6 +1,64 @@
 
-.Card {
-  width: 250;
+.Card * .ant-card-meta-title {
+  text-align: center;
+}
 
-  margin-bottom: 24px;
+.Card {
+  width: 250px;
+
+  display: flex; 
+  flex-flow: column;
+  justify-content: flex-end;
+
+  margin-left: 8px;
+  margin-right: 8px;
+  margin-bottom: 16px;
+}
+
+.Card > .ant-card-cover {
+  flex: auto;
+}
+
+.Card > .ant-card-body {
+/*  flex: 0 1 64px;*/
+
+  padding: 20px;
+  flex: 0 1 56px;
+}
+
+.Card > .ant-card-cover {
+  height: 100%;
+
+  display: flex;
+  align-items: center; 
+}
+
+.Card {
+  position: relative;
+}
+
+/*.Card .Price {
+  background-color: #108ee9;
+  color: white;
+
+  position: absolute;
+  z-index: 2;
+  top: 16px;
+  right: 0;
+}
+*/
+.Card .PriceTag {
+  background-color: #108ee9;
+  color: white;
+  font-size: 12px;
+
+  position: absolute;
+  z-index: 2;
+  top: 16px;
+  right: 0;
+
+  height: 22px;
+  line-height: 22px;
+  padding: 0 7px;
+  border-radius: 4px 0 0 4px; 
 }

@@ -1,17 +1,17 @@
 import React from 'react'
-import ComponentWithClassName from '../ComponentWithClassName'
+//import ComponentWithClassName from '../ComponentWithClassName'
 import PropTypes from 'prop-types'
 
 //import { Row } from 'antd';
 
-import TagSearch from '../TagSearch'
+//import TagSearch from '../TagSearch'
 import RangeSlider from '../RangeSlider'
 
 import FilterSubInput from './FilterSubInput'
 
 import './index.css'
 
-class Filter extends ComponentWithClassName {
+class Filter extends React.Component {
   propTypes : {
     onFilterChange: PropTypes.func.isRequired,
     limits: PropTypes.object.isRequired,
@@ -32,7 +32,7 @@ class Filter extends ComponentWithClassName {
             )
     }
 
-    this.ConTagSearch = fnConnectSubInput( TagSearch, "tags" );
+//    this.ConTagSearch = fnConnectSubInput( TagSearch, "tags" );
     this.ConPriceRangeSlider = fnConnectSubInput( RangeSlider, "pricerange" );
   }
 
@@ -45,13 +45,13 @@ class Filter extends ComponentWithClassName {
 
   render() {
 
-    const ConTagSearch = this.ConTagSearch;
+//    const ConTagSearch = this.ConTagSearch;
     const ConPriceRangeSlider = this.ConPriceRangeSlider;
 
     return (
-      <div className={this.className}>
-        <ConTagSearch />
-        <ConPriceRangeSlider title="Стоимость" />
+      <div className="CardsAreaa">
+      {/*  <ConTagSearch /> */}
+        <ConPriceRangeSlider title="Стоимость" className="FilterSubInput"/>
       </div>
     );
   }

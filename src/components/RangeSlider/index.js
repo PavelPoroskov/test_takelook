@@ -1,5 +1,5 @@
 import React from 'react'
-import ComponentWithClassName from '../ComponentWithClassName'
+//import ComponentWithClassName from '../ComponentWithClassName'
 import PropTypes from 'prop-types'
 
 import { Slider } from 'antd';
@@ -7,7 +7,7 @@ import debounce from 'lodash.debounce'
 
 import './index.css'
 
-class RangeSlider extends ComponentWithClassName {
+class RangeSlider extends React.Component {
   constructor(props) {
     super(props);
 
@@ -70,11 +70,13 @@ class RangeSlider extends ComponentWithClassName {
       'textAlign': 'right'
     };
     const stDiv2 = { 
-      width: '100%' 
+      width: '85%',
+      marginLeft: 'auto',
+      marginRight: 'auto'
     };
 
     return (
-      <div className={this.className}>
+      <div className="FilterSubInput PriceRange">
         <div style={stDiv1}>
           <div style={stDiv11}>
             {this.props.title}

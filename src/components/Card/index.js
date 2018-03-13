@@ -1,7 +1,8 @@
 import React from 'react';
-import ComponentWithClassName from '../ComponentWithClassName'
+//import ComponentWithClassName from '../ComponentWithClassName'
 import PropTypes from 'prop-types';
 
+//import { Card as AntdCard, Tag } from 'antd';
 import { Card as AntdCard } from 'antd';
 
 import './index.css'
@@ -10,22 +11,21 @@ const { Meta } = AntdCard;
 
 
 
-const Card = class extends ComponentWithClassName {
+const Card = class extends React.Component {
 
   render() {
 
-    const { name, view } = this.props.studio;
-    //  const { name, view, price } = studio;
+    //const { name, view } = this.props.studio;
+    const { name, view, price } = this.props.studio;
     const url = view[0];
 
-    const stCenter = { 'textAlign': 'center' };
-
     return (
-      <AntdCard className={this.className} 
-        style={{ width: 250 }}  
+      <AntdCard className="Card"
         cover={<img alt={name} src={url} />}
       >
-        <Meta title={name} style={stCenter}/>
+        <Meta title={name} />
+{/*       <Tag className="Price">{`${price} р.`}</Tag> */}
+       <div className="PriceTag">{`${price} р.`}</div>
       </AntdCard>
     )
   }

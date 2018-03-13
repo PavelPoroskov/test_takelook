@@ -23,10 +23,42 @@
 }*/
 
 
-.AppLogo {
+/*.logo {
   width: 120px;
   height: 31px;
-/*  background: rgba(255,255,255,.2);  */
+  background: rgba(255,255,255,.2);  
   margin: 16px 24px 16px 0;
-/*  float: left;*/
+  float: left;
+}
+*/
+.ant-layout-header {
+  background-color: inherit;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  height: 100%;
+}
+
+.logo img {
+  max-height: 47%;
+/*  padding-bottom: 3px;*/
+}
+
+/* remove ucolored bottom area */
+/* -do vertical scrollbar*/
+/*
+.ant-layout {
+  height: 100vh;
+}
+*/
+body {
+  background-color: #f0f2f5;
+}
+
+body * {
+  font-family: 'Roboto', sans-serif;
 }

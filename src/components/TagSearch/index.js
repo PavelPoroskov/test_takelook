@@ -1,11 +1,11 @@
 import React from 'react'
-import ComponentWithClassName from '../ComponentWithClassName'
+//import ComponentWithClassName from '../ComponentWithClassName'
 import PropTypes from 'prop-types'
 
 //import debounce from 'lodash.debounce'
 
 export default 
-class TagSearch extends ComponentWithClassName {
+class TagSearch extends React.Component {
   propTypes: {
     onChange: PropTypes.func.isRequired,
     limits: PropTypes.array.isRequired,
@@ -42,7 +42,7 @@ class TagSearch extends ComponentWithClassName {
 //    console.log("TagSearch::render()");
 
     return (
-      <div className={this.className}>
+      <div className="TagSearch">
       </div>
     );
   }

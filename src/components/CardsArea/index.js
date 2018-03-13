@@ -1,5 +1,5 @@
 import React from 'react'
-import ComponentWithClassName from '../ComponentWithClassName'
+//import ComponentWithClassName from '../ComponentWithClassName'
 import PropTypes from 'prop-types'
 
 import Card from '../Card'
@@ -7,7 +7,7 @@ import Card from '../Card'
 import './index.css'
 
 
-const CardsArea = class extends ComponentWithClassName {
+const CardsArea = class extends React.Component {
 
   render() {
 
@@ -15,7 +15,7 @@ const CardsArea = class extends ComponentWithClassName {
 
     return (
 
-      <div className={this.className}>
+      <div className="CardsArea">
         {studios.map( studio => 
           <Card studio={studio} key={studio.id}/>
         )}

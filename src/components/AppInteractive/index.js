@@ -1,6 +1,6 @@
 
 import React from 'react'
-import ComponentWithClassName from '../ComponentWithClassName'
+//import ComponentWithClassName from '../ComponentWithClassName'
 
 import CardsArea from '../CardsArea'
 import Filter from '../Filter'
@@ -11,7 +11,7 @@ import './index.css'
 import { Layout } from 'antd'
 const {  Sider, Content } = Layout;
 
-class AppInteractive extends ComponentWithClassName {
+class AppInteractive extends React.Component {
   constructor(props) {
     super(props);
 

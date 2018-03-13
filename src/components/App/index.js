@@ -1,5 +1,5 @@
 import React from 'react'
-import ComponentWithClassName from '../ComponentWithClassName'
+//import ComponentWithClassName from '../ComponentWithClassName'
 
 import AppInteracive from '../AppInteractive'
 
@@ -8,7 +8,7 @@ import './index.css'
 import { Layout } from 'antd'
 const {  Header } = Layout;
 
-class App extends ComponentWithClassName {
+class App extends React.Component {
 
   render() {
     return (
