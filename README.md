@@ -1,8 +1,12 @@
 
-test task for react
-demo: https://pavelporoskov.github.io/test_takelook/
+Тестовая задача для react-программиста: вывести картинки из json-файла 
+с сортировкой и фильтрацией, верстка.
 
-# test_takelook 
+demo: https://pavelporoskov.github.io/test_takelook/
+Использует: react, reselect, antd, lodash.debounce
+
+
+# Постановка задачи
 from https://github.com/devjsru/react_test
 
 Используйте JS/Typescript; React; Работоспособность в двух последних версиях десктопных браузеров (Chrome, Safari, Firefox).
