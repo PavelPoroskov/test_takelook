@@ -5,6 +5,7 @@
 
 .Card {
   width: 250px;
+  height: 220px;
 
   display: flex; 
   flex-flow: column;
