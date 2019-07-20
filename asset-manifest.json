@@ -1,6 +1,17 @@
 {
-  "main.css": "static/css/main.4d37dc39.css",
-  "main.css.map": "static/css/main.4d37dc39.css.map",
-  "main.js": "static/js/main.9d815016.js",
-  "main.js.map": "static/js/main.9d815016.js.map"
+  "files": {
+    "main.css": "/test_takelook/static/css/main.267b598a.chunk.css",
+    "main.js": "/test_takelook/static/js/main.dcf2b3fa.chunk.js",
+    "main.js.map": "/test_takelook/static/js/main.dcf2b3fa.chunk.js.map",
+    "runtime~main.js": "/test_takelook/static/js/runtime~main.c3125151.js",
+    "runtime~main.js.map": "/test_takelook/static/js/runtime~main.c3125151.js.map",
+    "static/css/2.64e3a141.chunk.css": "/test_takelook/static/css/2.64e3a141.chunk.css",
+    "static/js/2.4966bbfc.chunk.js": "/test_takelook/static/js/2.4966bbfc.chunk.js",
+    "static/js/2.4966bbfc.chunk.js.map": "/test_takelook/static/js/2.4966bbfc.chunk.js.map",
+    "index.html": "/test_takelook/index.html",
+    "precache-manifest.968a0181a0b6be43c2962335e964d650.js": "/test_takelook/precache-manifest.968a0181a0b6be43c2962335e964d650.js",
+    "service-worker.js": "/test_takelook/service-worker.js",
+    "static/css/2.64e3a141.chunk.css.map": "/test_takelook/static/css/2.64e3a141.chunk.css.map",
+    "static/css/main.267b598a.chunk.css.map": "/test_takelook/static/css/main.267b598a.chunk.css.map"
+  }
 }
